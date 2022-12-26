@@ -25,6 +25,7 @@ import Alarms from './components/alarms';
 import InstancesLimits from './components/instance-limits';
 import Events from './components/events';
 import DocList from './components/doclist';
+import BookList from './components/booklist';
 import comfortableVisualRefreshImage from './density-switch-images/comfortable-visual-refresh';
 import compactVisualRefreshImage from './density-switch-images/compact-visual-refresh';
 import { navHeader, Notifications } from '../commons/common-components';
@@ -41,10 +42,7 @@ function Content(props) {
         { colspan: { l: 8, m: 8, default: 12 } },
         { colspan: { l: 4, m: 4, default: 12 } },
         { colspan: { l: 12, m: 12, default: 12 } },
-        { colspan: { l: 6, m: 6, default: 12 } },
-        { colspan: { l: 6, m: 6, default: 12 } },
-        { colspan: { l: 6, m: 6, default: 12 } },
-        { colspan: { l: 6, m: 6, default: 12 } },
+        { colspan: { l: 12, m: 12, default: 12 } },
         { colspan: { l: 6, m: 6, default: 12 } },
         { colspan: { l: 6, m: 6, default: 12 } },
         { colspan: { l: 8, m: 8, default: 12 } },
@@ -54,6 +52,7 @@ function Content(props) {
       <ServiceOverview />
       <ServiceHealth />
       <DocList />
+      <BookList />
     </Grid>
   );
 }

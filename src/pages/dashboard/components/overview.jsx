@@ -9,27 +9,27 @@ export default function ServiceOverview() {
     <Container
       className="custom-dashboard-container"
       header={
-        <Header variant="h2" description="Viewing data from N. Virginia region">
-          Service overview
+        <Header variant="h2" description="">
+          Process overview
         </Header>
       }
     >
       <ColumnLayout columns="4" variant="text-grid">
         <div>
-          <Box variant="awsui-key-label">Running instances</Box>
-          <CounterLink>14</CounterLink>
+          <Box variant="awsui-key-label">Processed</Box>
+          <CounterLink>140</CounterLink>
         </div>
         <div>
-          <Box variant="awsui-key-label">Volumes</Box>
-          <CounterLink>126</CounterLink>
+          <Box variant="awsui-key-label">Failed</Box>
+          <CounterLink>12</CounterLink>
         </div>
         <div>
-          <Box variant="awsui-key-label">Security groups</Box>
-          <CounterLink>116</CounterLink>
+          <Box variant="awsui-key-label">On Hold</Box>
+          <CounterLink>6</CounterLink>
         </div>
         <div>
-          <Box variant="awsui-key-label">Load balancers</Box>
-          <CounterLink>28</CounterLink>
+          <Box variant="awsui-key-label">Total</Box>
+          <CounterLink>186</CounterLink>
         </div>
       </ColumnLayout>
     </Container>

@@ -9,7 +9,7 @@ function getPageContent(pageName, { title }) {
   return `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Cloudscape Demos - ${title}</title>
+    <title>Any Company IDP - ${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="vendor.css" rel="stylesheet">
@@ -18,7 +18,7 @@ function getPageContent(pageName, { title }) {
   <body>
     <header id="header">
       <ul class="menu-list awsui-context-top-navigation">
-        <li class="title"><a href="/">Cloudscape Demos</a></li>
+        <li class="title"><a href="/">Any Company IDP</a></li>
       </ul>
     </header>
     <div id="app"></div>

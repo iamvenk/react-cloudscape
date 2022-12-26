@@ -49,12 +49,9 @@ export function DashboardHeader(props) {
   return (
     <Header
       variant="h1"
-      info={
-        <InfoLink onFollow={() => props.loadHelpPanelContent(<EC2Info />)} ariaLabel={'Information about service dashboard.'} />
-      }
       actions={<Button variant="primary">Launch instance</Button>}
     >
-      Service Dashboard
+      Dashboard
     </Header>
   );
 }

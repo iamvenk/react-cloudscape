@@ -13,9 +13,9 @@ export function useNotifications(successNotification) {
 
   const notifications = [];
 
-  if (disclaimerItem && !disclaimerDismissed) {
-    notifications.push(disclaimerItem);
-  }
+  // if (disclaimerItem && !disclaimerDismissed) {
+  //   notifications.push(disclaimerItem);
+  // }
 
   if (successNotification & !successDismissed) {
     notifications.push({

@@ -38,25 +38,16 @@ export default function ServiceHealth(props) {
       header={
         <Header
           variant="h2"
-          info={
-            <InfoLink
-              onFollow={() => props.loadHelpPanelContent(<ServiceHealthInfo />)}
-              ariaLabel={'Information about service health.'}
-            />
-          }
+          info={null}
         >
-          Service health - <em>new</em>
+          Process Logs
         </Header>
       }
     >
       <ColumnLayout columns="2">
         <div>
-          <Box variant="awsui-key-label">Region</Box>
-          <div>US East (N. Virginia)</div>
-        </div>
-        <div>
-          <Box variant="awsui-key-label">Status</Box>
-          <StatusIndicator type="success">Service is operating normally</StatusIndicator>
+          <Box variant="awsui-key-label">q3-inventory-data-load.xls</Box>
+          <StatusIndicator type="success">Processed</StatusIndicator>
         </div>
       </ColumnLayout>
     </Container>

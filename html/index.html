@@ -6,7 +6,10 @@
         // TODO: Update the URLs
         // URL to load the document list
         var docListUrl = "";
+        var docDetailsUrl = ""
         var dataReloadInterval = 5000; //milliseconds
+        var tableDocList = null;
+        var tableDocDetails = null;
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,22 +56,32 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <div class="container">
+              <div class="row text-secondary">
+                <div class="col">Score </div>
+                <div class="col">Type</div>
+                <div class="col">Status</div>
+              </div>
+              <div class="row text-primary">
+                <div class="col" id="docScore"></div>
+                <div class="col" id="docType"></div>
+                <div class="col" id="docStatus"></div>
+              </div>
+              <div class="row">
+              </div>
+            </div>
             <table class="table" id="tblDocDetails">
               <thead>
-                <tr>
-                  <th scope="col">Field</th>
-                  <th scope="col">Value</th>
-                </tr>
+                <th></th>
+                <th></th>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">Field Name</th>
-                  <td>Field Value</td>
-                </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
+            <p class="text-left text-secondary" id="docId">
+            </p>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
@@ -94,8 +107,7 @@
     
     <script type="text/javascript">
 
-      var tableDocList = null;
-      var colDef = [
+      var colDefDocList = [
         {data: 'documentName', title: 'Name', width: "10%"},
         {data: 'documentType', title: 'Type', width: "10%"},
         {data: 'documentConfidenceScore', title: 'Score',     width: "5%"},
@@ -105,15 +117,21 @@
         // {data: 'documentKey', title: 'Key', width: "25%"},
         // {data: 'documentId',  title: 'Id', width: "20%"}
       ];
+      
+      var colDefDocDetails = [
+        {data: 'key', title: 'Key', width: "50%"},
+        {data: 'value', title: 'Value', width: "50%"},
+      ];
 
       $(document).ready(function(){
 
         tableDocList = $("#tableDocList").DataTable({
           ajax: {
             url: docListUrl,
-            dataSrc: 'body'
+            dataSrc: 'Items'
           },
-          columns: colDef,         
+          deferRender: true,
+          columns: colDefDocList,         
           select: true,
           scrollX: true,
           autoWidth: false,
@@ -125,13 +143,45 @@
         tableDocList.on('select', function(e, dt, type, indexes) {
           
           console.log('Table select event ' + type);
-          $('#modalDocDetails').modal('show')
+          $('#modalDocDetails').modal('show');
 
           if(!(type==='row')) return;
 
           var selDocId = tableDocList.rows(indexes).data().pluck('documentId')[0];
-          console.log('Selected id ' + selDocId);
+          var urlToLoad = docDetailsUrl + selDocId;
+          console.log(urlToLoad);
 
+          $.get(urlToLoad, function(data) {
+
+            if(data.Item == null) return;
+
+            $('#modalDocDetailsLabel').text(data.Item.documentName);
+            $('#docScore').text(data.Item.documentConfidenceScore);
+            $('#docType').text(data.Item.documentType);
+            $('#docStatus').text(data.Item.documentStatus);
+            $('#docId').text('Doc Id: ' + data.Item.documentId);
+            
+            var formData = [];
+
+            // Convert the formdata array of array element to object array
+            $.each(JSON.parse(data.Item.formData), function(index, v) {
+              if(v[0] != "Key") formData.push({key: v[0], value: v[1]});
+            });
+
+            tableDocDetails.clear().rows.add(formData).draw();
+
+          } );
+
+        });
+
+        tableDocDetails = $("#tblDocDetails").DataTable({
+          columns: colDefDocDetails,         
+          select: true,
+          scrollX: true,
+          autoWidth: false,
+          drawCallback: function(settings, start, end, max, total, pre) {
+            
+          }
         });
 
         // To reload the data in the doc list table
